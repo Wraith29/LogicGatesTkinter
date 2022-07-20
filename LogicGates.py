@@ -1,5 +1,5 @@
-from tkinter import *
-from tkinter.ttk import *
+from tkinter import Tk, Label, IntVar
+from tkinter.ttk import Radiobutton, W, Combobox, Button
 
 window = Tk()
 
@@ -9,63 +9,26 @@ window.geometry("350x250")
 finalVal = Label(window, text="", font="Helvetica 32")
 finalVal.grid(column=0, row=0, columnspan=3)
 
+
 def runGate():
     gate = chosen.get()
     tf = ""
-    i1 = True if inputOne.get() == 'True' else False
-    i2 = True if inputTwo.get() == 'True' else False
+    a = inputOne.get() == 'True'
+    b = inputTwo.get() == 'True'
     if gate == 1:
-        tf = orGate(i1, i2)
+        tf = a or b
     elif gate == 2:
-        tf = andGate(i1, i2)
+        tf = a and b
     elif gate == 3:
-        tf = xorGate(i1, i2)
+        tf = a and not b or b and not a
     elif gate == 4:
-        tf = nandGate(i1, i2)
+        tf = not a and not b
     elif gate == 5:
-        tf = norGate(i1, i2)
+        tf = not a or b
 
     finalVal.configure(text=str(bool(tf)))
     finalVal.update()
     window.update()
-
-def orGate(val1, val2):
-    print (val1, val2)
-    if val1 or val2:
-        return True
-    else:
-        return False
-
-
-def andGate(val1, val2):
-    if val1 and val2:
-        return True
-    else:
-        return False
-
-
-def xorGate(val1, val2):
-    if val1 and not val2:
-        return True
-    elif val2 and not val1:
-        return True
-    else:
-        return False
-
-
-def nandGate(val1, val2):
-    if not val1 and not val2:
-        return True
-    else:
-        return False
-
-
-def norGate(val1, val2):
-    if val1 or val2:
-        return False
-    else:
-        return True
-
 
 
 chosen = IntVar()
